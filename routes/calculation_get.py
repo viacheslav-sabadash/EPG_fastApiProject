@@ -13,7 +13,7 @@ routes_calculation_to_text = APIRouter()
         200: {
             "description": "Expression and result of calculation",
             "content": {
-                "text/html": {
+                "text/plain": {
                     "example": "2+2/2 = 3"
                 }
             },
@@ -21,7 +21,7 @@ routes_calculation_to_text = APIRouter()
         400: {
             "description": "Arithmetic or syntax error",
             "content": {
-                "text/html": {
+                "text/plain": {
                     "example": "Error: division by zero"
                 }
             },
@@ -40,6 +40,6 @@ async def calculation_to_text(
     try:
         value: int = eval(phrase)
     except (ArithmeticError, SyntaxError) as a_error:
-        return Response(content=f'Error: {a_error.args[0]}', media_type="text/html", status_code=400)
+        return Response(content=f'Error: {a_error.args[0]}', media_type="text/plain", status_code=400)
     else:
-        return Response(content=f'{phrase} = {value}', media_type="text/html")
+        return Response(content=f'{phrase} = {value}', media_type="text/plain")
