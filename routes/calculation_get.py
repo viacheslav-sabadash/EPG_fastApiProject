@@ -35,8 +35,9 @@ async def calculation_to_text(
             example='2+2/2',
             default='0',
             regex=settings.val_regex
-        )
+        ),
 ):
+    phrase = phrase.replace(' ', '+')
     try:
         value: int = eval(phrase)
     except (ArithmeticError, SyntaxError) as a_error:
