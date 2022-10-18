@@ -1,0 +1,19 @@
+### Domain
+
+GET http://127.0.0.1:8000/
+Accept: text/plain
+
+### Index
+GET http://127.0.0.1:8000/index
+Accept: text/plain
+
+### Eval Get
+GET http://127.0.0.1:8000/eval?phrase=(1+2)*2
+Accept: text/plain
+
+### Eval Post
+POST http://127.0.0.1:8000/eval
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+phrase=3%2B3*2
