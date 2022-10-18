@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Form
+from fastapi.responses import JSONResponse
 
 from config import settings
 
@@ -19,6 +20,16 @@ routes_calculation_to_json = APIRouter()
                 }
             },
         },
+        400: {
+            "description": "Arithmetic or syntax error",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "detail": "Error: division by zero"
+                    }
+                }
+            },
+        },
     }
 )
 async def calculation_to_json(
@@ -30,8 +41,16 @@ async def calculation_to_json(
             regex=settings.val_regex
         )
 ):
-    return {
-        'data': {
-            'phrase': phrase, 'value': eval(phrase)
+    try:
+        value: int = eval(phrase)
+    except (ArithmeticError, SyntaxError) as a_error:
+        return JSONResponse(
+            content={"detail": f'Error: {a_error.args[0]}'},
+            status_code=400
+        )
+    else:
+        return {
+            'data': {
+                'phrase': phrase, 'value': eval(phrase)
+            }
         }
-    }
