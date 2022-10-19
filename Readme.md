@@ -30,8 +30,8 @@ GET http://127.0.0.1:8000/index
 
 GET http://127.0.0.1:8000/eval?phrase=(1+2)*2
 
-POST http://127.0.0.1:8000/eval
-Accept: application/json
+POST http://127.0.0.1:8000/eval<br>
+Accept: application/json<br>
 Content-Type: application/x-www-form-urlencoded
 
 phrase=3%2B3*2
