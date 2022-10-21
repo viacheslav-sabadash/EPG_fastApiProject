@@ -1,5 +1,7 @@
 ## EPG_FastApi_Calc
 
+FastAPI calculator
+
 ### Installation
 
 #### Creating Docker container
